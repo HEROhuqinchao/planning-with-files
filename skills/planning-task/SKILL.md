@@ -1,5 +1,5 @@
 ---
-name: planning-with-files
+name: planning-task
 description: 实现 Manus 风格的文件化任务规划，通过创建 task_plan.md、findings.md 和 progress.md 来组织和追踪复杂任务进度。当用户需要规划、拆解或组织多步骤项目、研究任务，或任何需要 5 次以上工具调用的工作时触发。支持 /clear 后自动恢复上一会话上下文。
 user-invocable: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep"
