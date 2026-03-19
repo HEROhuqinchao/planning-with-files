@@ -1,6 +1,6 @@
 ---
 name: planning-with-files
-description: Implements Manus-style file-based planning to organize and track progress on complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when asked to plan out, break down, or organize a multi-step project, research task, or any work requiring >5 tool calls. Supports automatic session recovery after /clear.
+description: 实现 Manus 风格的文件化任务规划，通过创建 task_plan.md、findings.md 和 progress.md 来组织和追踪复杂任务进度。当用户需要规划、拆解或组织多步骤项目、研究任务，或任何需要 5 次以上工具调用的工作时触发。支持 /clear 后自动恢复上一会话上下文。
 user-invocable: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep"
 hooks:
@@ -23,14 +23,14 @@ hooks:
         - type: command
           command: "SD=\"${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/planning-with-files}/scripts\"; powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$SD/check-complete.ps1\" 2>/dev/null || sh \"$SD/check-complete.sh\""
 metadata:
-  version: "2.23.0"
+  version: "1.0.0"
 ---
 
 # Planning with Files
 
 像 Manus 一样工作：使用持久化 Markdown 文件作为「磁盘上的工作记忆」。
 
-## 首要任务：恢复上下文（v2.2.0）
+## 首要任务：恢复上下文
 
 **在做任何事之前**，检查规划文件是否存在并读取：
 
@@ -115,9 +115,9 @@ $(command -v python3 || command -v python) ${CLAUDE_PLUGIN_ROOT}/scripts/session
 每个错误都写入计划文件，积累知识，避免重复犯错。
 
 ```markdown
-## Errors Encountered
-| Error | Attempt | Resolution |
-|-------|---------|------------|
+## 遇到的错误
+| 错误 | 尝试次数 | 解决方式 |
+|------|---------|---------|
 | FileNotFoundError | 1 | Created default config |
 | API timeout | 2 | Added retry logic |
 ```
@@ -210,7 +210,7 @@ if action_failed:
 
 - `scripts/init-session.sh` — 初始化所有规划文件
 - `scripts/check-complete.sh` — 验证所有阶段是否完成
-- `scripts/session-catchup.py` — 从上一个会话恢复上下文（v2.2.0）
+- `scripts/session-catchup.py` — 从上一个会话恢复上下文
 
 ## 进阶主题
 
