@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Session Catchup Script for planning-with-files
+planning-with-files 会话追赶脚本
 
-Analyzes the previous session to find unsynced context after the last
-planning file update. Designed to run on SessionStart.
+分析上一个会话，找出最后一次规划文件更新之后尚未同步的上下文。
+设计为在 SessionStart 时运行。
 
-Usage: python3 session-catchup.py [project-path]
+用法：python3 session-catchup.py [project-path]
 """
 
 import json
@@ -19,7 +19,7 @@ PLANNING_FILES = ['task_plan.md', 'progress.md', 'findings.md']
 
 
 def get_project_dir(project_path: str) -> Path:
-    """Convert project path to Claude's storage path format."""
+    """将项目路径转换为 Claude 的存储路径格式。"""
     sanitized = project_path.replace('/', '-')
     if not sanitized.startswith('-'):
         sanitized = '-' + sanitized
@@ -28,14 +28,14 @@ def get_project_dir(project_path: str) -> Path:
 
 
 def get_sessions_sorted(project_dir: Path) -> List[Path]:
-    """Get all session files sorted by modification time (newest first)."""
+    """获取所有会话文件，按修改时间排序（最新在前）。"""
     sessions = list(project_dir.glob('*.jsonl'))
     main_sessions = [s for s in sessions if not s.name.startswith('agent-')]
     return sorted(main_sessions, key=lambda p: p.stat().st_mtime, reverse=True)
 
 
 def parse_session_messages(session_file: Path) -> List[Dict]:
-    """Parse all messages from a session file, preserving order."""
+    """解析会话文件中的所有消息，保留原始顺序。"""
     messages = []
     with open(session_file, 'r') as f:
         for line_num, line in enumerate(f):
@@ -50,8 +50,8 @@ def parse_session_messages(session_file: Path) -> List[Dict]:
 
 def find_last_planning_update(messages: List[Dict]) -> Tuple[int, Optional[str]]:
     """
-    Find the last time a planning file was written/edited.
-    Returns (line_number, filename) or (-1, None) if not found.
+    查找规划文件最后一次被写入/编辑的时间。
+    返回 (行号, 文件名)，若未找到则返回 (-1, None)。
     """
     last_update_line = -1
     last_update_file = None
@@ -78,7 +78,7 @@ def find_last_planning_update(messages: List[Dict]) -> Tuple[int, Optional[str]]
 
 
 def extract_messages_after(messages: List[Dict], after_line: int) -> List[Dict]:
-    """Extract conversation messages after a certain line number."""
+    """提取指定行号之后的对话消息。"""
     result = []
     for msg in messages:
         if msg['_line_num'] <= after_line:
@@ -142,23 +142,23 @@ def main():
     project_path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     project_dir = get_project_dir(project_path)
 
-    # Check if planning files exist (indicates active task)
+    # 检查规划文件是否存在（表示有活跃任务）
     has_planning_files = any(
         Path(project_path, f).exists() for f in PLANNING_FILES
     )
     if not has_planning_files:
-        # No planning files in this project; skip catchup to avoid noise.
+        # 该项目无规划文件，跳过追赶以避免无效输出
         return
 
     if not project_dir.exists():
-        # No previous sessions, nothing to catch up on
+        # 没有历史会话，无需追赶
         return
 
     sessions = get_sessions_sorted(project_dir)
     if len(sessions) < 1:
         return
 
-    # Find a substantial previous session
+    # 找到一个内容充实的历史会话（文件大小 > 5000 字节）
     target_session = None
     for session in sessions:
         if session.stat().st_size > 5000:
@@ -171,17 +171,17 @@ def main():
     messages = parse_session_messages(target_session)
     last_update_line, last_update_file = find_last_planning_update(messages)
 
-    # No planning updates in the target session; skip catchup output.
+    # 目标会话中无规划文件更新记录，跳过追赶输出
     if last_update_line < 0:
         return
 
-    # Only output if there's unsynced content
+    # 仅当存在未同步内容时才输出
     messages_after = extract_messages_after(messages, last_update_line)
 
     if not messages_after:
         return
 
-    # Output catchup report
+    # 输出追赶报告
     print("\n[planning-with-files] SESSION CATCHUP DETECTED")
     print(f"Previous session: {target_session.stem}")
 
@@ -189,7 +189,7 @@ def main():
     print(f"Unsynced messages: {len(messages_after)}")
 
     print("\n--- UNSYNCED CONTEXT ---")
-    for msg in messages_after[-15:]:  # Last 15 messages
+    for msg in messages_after[-15:]:  # 最近 15 条消息
         if msg['role'] == 'user':
             print(f"USER: {msg['content'][:300]}")
         else:

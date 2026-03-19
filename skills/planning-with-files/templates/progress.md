@@ -1,114 +1,114 @@
-# Progress Log
-<!-- 
-  WHAT: Your session log - a chronological record of what you did, when, and what happened.
-  WHY: Answers "What have I done?" in the 5-Question Reboot Test. Helps you resume after breaks.
-  WHEN: Update after completing each phase or encountering errors. More detailed than task_plan.md.
+# Progress Log（进度日志）
+<!--
+  是什么：会话日志——按时间顺序记录你做了什么、何时做的、发生了什么。
+  为什么：回答五问重启测试中「我做了什么？」这一问题，帮助你在中断后恢复工作。
+  何时：完成每个阶段或遇到错误后更新，比 task_plan.md 更详细。
 -->
 
-## Session: [DATE]
-<!-- 
-  WHAT: The date of this work session.
-  WHY: Helps track when work happened, useful for resuming after time gaps.
-  EXAMPLE: 2026-01-15
+## Session（会话）：[DATE]
+<!--
+  是什么：本次工作会话的日期。
+  为什么：帮助追踪工作时间，便于在时间间隔后恢复。
+  示例：2026-01-15
 -->
 
-### Phase 1: [Title]
-<!-- 
-  WHAT: Detailed log of actions taken during this phase.
-  WHY: Provides context for what was done, making it easier to resume or debug.
-  WHEN: Update as you work through the phase, or at least when you complete it.
+### Phase 1: [Title]（标题）
+<!--
+  是什么：此阶段所采取行动的详细日志。
+  为什么：提供操作上下文，便于恢复工作或调试。
+  何时：在阶段进行过程中更新，或至少在完成时更新。
 -->
 - **Status:** in_progress
-- **Started:** [timestamp]
-<!-- 
-  STATUS: Same as task_plan.md (pending, in_progress, complete)
-  TIMESTAMP: When you started this phase (e.g., "2026-01-15 10:00")
+- **Started:** [timestamp]（时间戳）
+<!--
+  状态：与 task_plan.md 相同（pending, in_progress, complete）
+  时间戳：开始此阶段的时间（如"2026-01-15 10:00"）
 -->
-- Actions taken:
-  <!-- 
-    WHAT: List of specific actions you performed.
-    EXAMPLE:
+- Actions taken（已采取的行动）：
+  <!--
+    是什么：列出你执行的具体操作。
+    示例：
       - Created todo.py with basic structure
       - Implemented add functionality
       - Fixed FileNotFoundError
   -->
   -
-- Files created/modified:
-  <!-- 
-    WHAT: Which files you created or changed.
-    WHY: Quick reference for what was touched. Helps with debugging and review.
-    EXAMPLE:
+- Files created/modified（创建/修改的文件）：
+  <!--
+    是什么：创建或修改了哪些文件。
+    为什么：快速参考被改动的内容，便于调试和审查。
+    示例：
       - todo.py (created)
       - todos.json (created by app)
       - task_plan.md (updated)
   -->
   -
 
-### Phase 2: [Title]
-<!-- 
-  WHAT: Same structure as Phase 1, for the next phase.
-  WHY: Keep a separate log entry for each phase to track progress clearly.
+### Phase 2: [Title]（标题）
+<!--
+  是什么：与 Phase 1 相同的结构，用于下一个阶段。
+  为什么：为每个阶段保留独立的日志条目，清晰追踪进度。
 -->
 - **Status:** pending
-- Actions taken:
+- Actions taken（已采取的行动）：
   -
-- Files created/modified:
+- Files created/modified（创建/修改的文件）：
   -
 
-## Test Results
-<!-- 
-  WHAT: Table of tests you ran, what you expected, what actually happened.
-  WHY: Documents verification of functionality. Helps catch regressions.
-  WHEN: Update as you test features, especially during Phase 4 (Testing & Verification).
-  EXAMPLE:
+## Test Results（测试结果）
+<!--
+  是什么：运行的测试表格，包含期望结果和实际结果。
+  为什么：记录功能验证情况，帮助发现回归问题。
+  何时：测试功能时更新，尤其在 Phase 4（测试与验证）期间。
+  示例：
     | Add task | python todo.py add "Buy milk" | Task added | Task added successfully | ✓ |
     | List tasks | python todo.py list | Shows all tasks | Shows all tasks | ✓ |
 -->
-| Test | Input | Expected | Actual | Status |
-|------|-------|----------|--------|--------|
-|      |       |          |        |        |
+| Test（测试） | Input（输入） | Expected（期望） | Actual（实际） | Status（状态） |
+|-------------|--------------|-----------------|---------------|--------------|
+|             |              |                 |               |              |
 
-## Error Log
-<!-- 
-  WHAT: Detailed log of every error encountered, with timestamps and resolution attempts.
-  WHY: More detailed than task_plan.md's error table. Helps you learn from mistakes.
-  WHEN: Add immediately when an error occurs, even if you fix it quickly.
-  EXAMPLE:
+## Error Log（错误日志）
+<!--
+  是什么：遇到的每个错误的详细日志，包含时间戳和解决尝试记录。
+  为什么：比 task_plan.md 的错误表更详细，帮助从错误中学习。
+  何时：错误发生时立即添加，即使很快解决也要记录。
+  示例：
     | 2026-01-15 10:35 | FileNotFoundError | 1 | Added file existence check |
     | 2026-01-15 10:37 | JSONDecodeError | 2 | Added empty file handling |
 -->
-<!-- Keep ALL errors - they help avoid repetition -->
-| Timestamp | Error | Attempt | Resolution |
-|-----------|-------|---------|------------|
-|           |       | 1       |            |
+<!-- 保留所有错误记录 — 有助于避免重复 -->
+| Timestamp（时间戳） | Error（错误） | Attempt（次数） | Resolution（解决方式） |
+|--------------------|--------------|----------------|----------------------|
+|                    |              | 1              |                      |
 
-## 5-Question Reboot Check
-<!-- 
-  WHAT: Five questions that verify your context is solid. If you can answer these, you're on track.
-  WHY: This is the "reboot test" - if you can answer all 5, you can resume work effectively.
-  WHEN: Update periodically, especially when resuming after a break or context reset.
-  
-  THE 5 QUESTIONS:
-  1. Where am I? → Current phase in task_plan.md
-  2. Where am I going? → Remaining phases
-  3. What's the goal? → Goal statement in task_plan.md
-  4. What have I learned? → See findings.md
-  5. What have I done? → See progress.md (this file)
+## 五问重启检查
+<!--
+  是什么：验证上下文是否稳固的五个问题，能全部回答说明状态良好。
+  为什么：这是「重启测试」——如果能回答所有 5 个问题，就能有效恢复工作。
+  何时：定期更新，尤其是在中断或上下文重置后恢复时。
+
+  五个问题：
+  1. 我在哪里？→ task_plan.md 中的当前阶段
+  2. 我要去哪里？→ 剩余阶段
+  3. 目标是什么？→ task_plan.md 中的目标声明
+  4. 我学到了什么？→ 参见 findings.md
+  5. 我做了什么？→ 参见 progress.md（本文件）
 -->
-<!-- If you can answer these, context is solid -->
-| Question | Answer |
-|----------|--------|
-| Where am I? | Phase X |
-| Where am I going? | Remaining phases |
-| What's the goal? | [goal statement] |
-| What have I learned? | See findings.md |
-| What have I done? | See above |
+<!-- 能回答这些问题说明上下文稳固 -->
+| 问题 | 答案 |
+|------|------|
+| 我在哪里？ | Phase X |
+| 我要去哪里？ | 剩余阶段 |
+| 目标是什么？ | [目标声明] |
+| 我学到了什么？ | 参见 findings.md |
+| 我做了什么？ | 参见上方 |
 
 ---
-<!-- 
-  REMINDER: 
-  - Update after completing each phase or encountering errors
-  - Be detailed - this is your "what happened" log
-  - Include timestamps for errors to track when issues occurred
+<!--
+  提醒：
+  - 完成每个阶段或遇到错误后更新
+  - 记录详细 — 这是你的「发生了什么」日志
+  - 为错误添加时间戳，便于追踪问题发生时间
 -->
-*Update after completing each phase or encountering errors*
+*完成每个阶段或遇到错误后更新*

@@ -1,5 +1,5 @@
-# Initialize planning files for a new session
-# Usage: .\init-session.ps1 [project-name]
+# 初始化新会话的规划文件
+# 用法：.\init-session.ps1 [project-name]
 
 param(
     [string]$ProjectName = "project"
@@ -9,7 +9,7 @@ $DATE = Get-Date -Format "yyyy-MM-dd"
 
 Write-Host "Initializing planning files for: $ProjectName"
 
-# Create task_plan.md if it doesn't exist
+# 若 task_plan.md 不存在则创建
 if (-not (Test-Path "task_plan.md")) {
     @"
 # Task Plan: [Brief Description]
@@ -61,7 +61,7 @@ Phase 1
     Write-Host "task_plan.md already exists, skipping"
 }
 
-# Create findings.md if it doesn't exist
+# 若 findings.md 不存在则创建
 if (-not (Test-Path "findings.md")) {
     @"
 # Findings & Decisions
@@ -88,7 +88,7 @@ if (-not (Test-Path "findings.md")) {
     Write-Host "findings.md already exists, skipping"
 }
 
-# Create progress.md if it doesn't exist
+# 若 progress.md 不存在则创建
 if (-not (Test-Path "progress.md")) {
     @"
 # Progress Log

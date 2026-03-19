@@ -1,6 +1,6 @@
 #!/bin/bash
-# Initialize planning files for a new session
-# Usage: ./init-session.sh [project-name]
+# 初始化新会话的规划文件
+# 用法：./init-session.sh [project-name]
 
 set -e
 
@@ -9,7 +9,7 @@ DATE=$(date +%Y-%m-%d)
 
 echo "Initializing planning files for: $PROJECT_NAME"
 
-# Create task_plan.md if it doesn't exist
+# 若 task_plan.md 不存在则创建
 if [ ! -f "task_plan.md" ]; then
     cat > task_plan.md << 'EOF'
 # Task Plan: [Brief Description]
@@ -61,7 +61,7 @@ else
     echo "task_plan.md already exists, skipping"
 fi
 
-# Create findings.md if it doesn't exist
+# 若 findings.md 不存在则创建
 if [ ! -f "findings.md" ]; then
     cat > findings.md << 'EOF'
 # Findings & Decisions
@@ -88,7 +88,7 @@ else
     echo "findings.md already exists, skipping"
 fi
 
-# Create progress.md if it doesn't exist
+# 若 progress.md 不存在则创建
 if [ ! -f "progress.md" ]; then
     cat > progress.md << EOF
 # Progress Log

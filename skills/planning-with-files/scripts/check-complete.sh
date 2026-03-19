@@ -1,7 +1,7 @@
 #!/bin/bash
-# Check if all phases in task_plan.md are complete
-# Always exits 0 — uses stdout for status reporting
-# Used by Stop hook to report task completion status
+# 检查 task_plan.md 中所有阶段是否已完成
+# 始终以退出码 0 退出 — 通过 stdout 输出状态报告
+# 由 Stop hook 调用，用于报告任务完成状态
 
 PLAN_FILE="${1:-task_plan.md}"
 
@@ -10,28 +10,28 @@ if [ ! -f "$PLAN_FILE" ]; then
     exit 0
 fi
 
-# Count total phases
+# 统计总阶段数
 TOTAL=$(grep -c "### Phase" "$PLAN_FILE" || true)
 
-# Check for **Status:** format first
+# 优先检查 **Status:** 格式
 COMPLETE=$(grep -cF "**Status:** complete" "$PLAN_FILE" || true)
 IN_PROGRESS=$(grep -cF "**Status:** in_progress" "$PLAN_FILE" || true)
 PENDING=$(grep -cF "**Status:** pending" "$PLAN_FILE" || true)
 
-# Fallback: check for [complete] inline format if **Status:** not found
+# 兜底方案：若未找到 **Status:** 格式，则检查 [complete] 内联格式
 if [ "$COMPLETE" -eq 0 ] && [ "$IN_PROGRESS" -eq 0 ] && [ "$PENDING" -eq 0 ]; then
     COMPLETE=$(grep -c "\[complete\]" "$PLAN_FILE" || true)
     IN_PROGRESS=$(grep -c "\[in_progress\]" "$PLAN_FILE" || true)
     PENDING=$(grep -c "\[pending\]" "$PLAN_FILE" || true)
 fi
 
-# Default to 0 if empty
+# 若变量为空则默认置 0
 : "${TOTAL:=0}"
 : "${COMPLETE:=0}"
 : "${IN_PROGRESS:=0}"
 : "${PENDING:=0}"
 
-# Report status (always exit 0 — incomplete task is a normal state)
+# 输出状态报告（始终以退出码 0 退出 — 任务未完成是正常状态）
 if [ "$COMPLETE" -eq "$TOTAL" ] && [ "$TOTAL" -gt 0 ]; then
     echo "[planning-with-files] ALL PHASES COMPLETE ($COMPLETE/$TOTAL). If the user has additional work, add new phases to task_plan.md before starting."
 else
